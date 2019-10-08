@@ -1,0 +1,38 @@
+-- A library clause declares a name as a library.  It 
+-- does not create the library; it simply forward declares 
+-- it. 
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+entity SOMADOR is
+	port
+	(
+		-- Input ports
+		A	: in  std_logic_vector(31 DOWNTO 0);
+		B	: in   std_logic_vector(31 DOWNTO 0);
+		FUNC	: in std_logic_vector(31 DOWNTO 0);
+
+		-- Output ports
+		Y	: out std_logic_vector(31 DOWNTO 0);
+		Zero	: out std_logic;
+		Igual	: out std_logic
+	);
+end entity;
+
+
+
+-- Library Clause(s) (optional)
+-- Use Clause(s) (optional)
+
+architecture sum of SOMADOR is
+
+begin
+	Y <=  (A + B) when (FUNC = "00") else 
+			(A - B) when (FUNC = "01") else
+			A rol 1  when (FUNC = "10") else (others => 'Z');
+			
+	Igual <= '1' when ((A = B) and (FUNC = "11")) else '0';
+	Zero <= '1' when (Y = "0000_0000_0000_0000_0000_0000_0000_0000") else '0';
+end architecture;
+
+

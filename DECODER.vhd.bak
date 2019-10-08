@@ -1,0 +1,131 @@
+--------------------------------------------------------
+-- Simple Microprocessor Design
+--
+-- Program Counter 
+-- PC.vhd
+--------------------------------------------------------
+
+library	ieee;
+use ieee.std_logic_1164.all;
+use work.constant_lib.all;
+
+entity DECODER is
+port(	
+		addr:	in std_logic_vector(7 DOWNTO 0);
+		dataIn:	in std_logic_vector(7 DOWNTO 0);
+		dataDisplayContador:	out std_logic_vector(4 DOWNTO 0);
+		dataIn:	out std_logic;
+);
+end entity;
+
+architecture comportament of DECODER is
+begin				
+	process()
+	begin
+			if (addr= '000' & '0000')  then --ativar o registrador do display segundos
+				dataDisplayContador(0) <= '1'
+				dataDisplayContador(1) <= '0'
+				dataDisplayContador(2) <= '0'
+				dataDisplayContador(3) <= '0'
+				dataDisplayContador(4) <= '0'
+				dataIn <= '0'
+				
+				
+ 			elsif (addr= '000' & '0001') then --Reseta contador comum para ele contar de novo
+				dataDisplayContador(0) <= '0'
+				dataDisplayContador(1) <= '0'
+				dataDisplayContador(2) <= '0'
+				dataDisplayContador(3) <= '1'
+				dataDisplayContador(4) <= '0'
+				dataIn <= '0'
+				
+			elsif (addr= '000' & '0010') then --Reseta contador acelerado para ele contar de novo
+				dataDisplayContador(0) <= '0'
+				dataDisplayContador(1) <= '0'
+				dataDisplayContador(2) <= '0'
+				dataDisplayContador(3) <= '0'
+				dataDisplayContador(4) <= '1'
+				dataIn <= '0'
+			
+--			elsif (addr= '000' & '0011') then -- Switch 4
+--				dataDisplayContador(0) <= '0'
+--				dataDisplayContador(1) <= '0'
+--				dataDisplayContador(2) <= '0'
+--				dataDisplayContador(3) <= '0'
+--				dataDisplayContador(4) <= '0'
+--				dataIn <= '1'
+
+				
+			elsif (addr= '000' & '0100') then --ativar o registrador do display minuto
+				dataDisplayContador(0) <= '0'
+				dataDisplayContador(1) <= '1'
+				dataDisplayContador(2) <= '0'
+				dataDisplayContador(3) <= '0'
+				dataDisplayContador(4) <= '0'
+				
+			elsif (addr= '000' & '0101') then --ativar o registrador do display hora
+				dataDisplayContador(0) <= '0'
+				dataDisplayContador(1) <= '0'
+				dataDisplayContador(2) <= '1'
+				dataDisplayContador(3) <= '0'
+				dataDisplayContador(4) <= '0'
+				
+			elsif (addr= '000' & '0110') then --Switch 1
+				dataDisplayContador(0) <= '0'
+				dataDisplayContador(1) <= '0'
+				dataDisplayContador(2) <= '0'
+				dataDisplayContador(3) <= '0'
+				dataDisplayContador(4) <= '0'
+				dataIn <= '1'				
+
+				
+			elsif (addr= '000' & '0111') then --Switch 2
+				dataDisplayContador(0) <= '0'
+				dataDisplayContador(1) <= '0'
+				dataDisplayContador(2) <= '0'
+				dataDisplayContador(3) <= '0'
+				dataDisplayContador(4) <= '0'
+
+				
+			elsif (addr= '000' & '1000') then --Switch 3
+				dataDisplayContador(0) <= '0'
+				dataDisplayContador(1) <= '0'
+				dataDisplayContador(2) <= '0'
+				dataDisplayContador(3) <= '0'
+				dataDisplayContador(4) <= '0'
+				dataIn <= '1'
+
+			
+			elsif (addr= '000' & '1001') then --Pega a flag da base de tempo
+				dataDisplayContador(0) <= '0'
+				dataDisplayContador(1) <= '0'
+				dataDisplayContador(2) <= '0'
+				dataDisplayContador(3) <= '0'
+				dataDisplayContador(4) <= '0'
+				dataIn <= '1'
+
+				
+--			elsif (addr= '000' & '1010') then
+--				dataDisplayContador(0) <= '0'
+--				dataDisplayContador(1) <= '0'
+--				dataDisplayContador(2) <= '0'
+--				dataDisplayContador(3) <= '0'
+--				dataDisplayContador(4) <= '0'
+--				dataIn <= '1'
+				
+			elsif (addr= '000' & '1111') then --NADA
+				dataDisplayContador(0) <= '0'
+				dataDisplayContador(1) <= '0'
+				dataDisplayContador(2) <= '0'
+				dataDisplayContador(3) <= '0'
+				dataDisplayContador(4) <= '0'
+				dataIn <= '0'
+				
+				
+				
+			end if;
+	end process;
+
+	PCout <= tmp_PC;
+
+end behv;
